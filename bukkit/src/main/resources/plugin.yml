@@ -1,0 +1,10 @@
+name: "${name}"
+version: "${version}"
+main: kz.hxncus.mc.entitygenetics.EntityGenetics
+api-version: '1.20'
+commands:
+  entitygenetics:
+    aliases:
+      - eg
+      - egenetics
+      - entityg
