@@ -1,13 +1,12 @@
 package kz.hxncus.mc.entitygenetics.config;
 
 import kz.hxncus.mc.entitygenetics.EntityGenetics;
-import lombok.Getter;
+import kz.hxncus.mc.minesonapi.MinesonAPI;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.List;
 
-@Getter
 public enum Settings {
     VERSION("version"), DEBUG("debug"), LANGUAGE("language");
     private final String path;
@@ -17,11 +16,11 @@ public enum Settings {
     }
 
     public Object getValue() {
-        return getSettings().get(path);
+        return getSettings().get(this.path);
     }
 
     public Object getValue(Object def) {
-        return getSettings().get(path, def);
+        return getSettings().get(this.path, def);
     }
 
     public void setValue(Object value) {
@@ -29,7 +28,7 @@ public enum Settings {
     }
 
     public void setValue(Object value, boolean save) {
-        getSettings().set(path, value);
+        getSettings().set(this.path, value);
         if (save) {
             EntityGenetics plugin = EntityGenetics.get();
             try {
@@ -49,8 +48,12 @@ public enum Settings {
         return colorize((String) getValue(def));
     }
 
+    public String toPath() {
+        return this.path;
+    }
+
     public String colorize(String input) {
-        return EntityGenetics.get().getColorManager().process(input);
+        return MinesonAPI.get().getColorManager().process(input);
     }
 
     public boolean toBool() {
@@ -62,7 +65,7 @@ public enum Settings {
     }
 
     public List<String> toStringList() {
-        List<String> stringList = getSettings().getStringList(path);
+        List<String> stringList = getSettings().getStringList(this.path);
         stringList.replaceAll(this::colorize);
         return stringList;
     }
@@ -72,6 +75,6 @@ public enum Settings {
     }
 
     public YamlConfiguration getSettings() {
-        return EntityGenetics.get().getConfigManager().getSettings();
+        return MinesonAPI.get().getConfigManager().getOrCreateConfig("settings.yml");
     }
 }

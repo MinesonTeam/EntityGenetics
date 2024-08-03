@@ -68,7 +68,7 @@ body:
       label: Server logs and config
       description: |
         If you think it will be helpful, please include any server logs.
-        Also please provide the config.yml file from `plugins/EntityGenetics/config.yml`.
+        Also please provide the settings.yml file from `plugins/EntityGenetics/settings.yml`.
       placeholder: Logs and configs (if you think it'll help!)
     validations:
       required: false

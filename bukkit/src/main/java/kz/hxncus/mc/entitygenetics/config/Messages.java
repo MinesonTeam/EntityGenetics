@@ -1,6 +1,6 @@
 package kz.hxncus.mc.entitygenetics.config;
 
-import kz.hxncus.mc.entitygenetics.EntityGenetics;
+import kz.hxncus.mc.minesonapi.MinesonAPI;
 import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -11,8 +11,8 @@ import java.util.List;
 public enum Messages {
     PREFIX("general.prefix"), UPDATING_CONFIG_KEY("general.updating_config"), REMOVING_CONFIG_KEY("general.removing_config"),
     NOT_ENOUGH_PERMISSION("command.not_enough_permission"), INCORRECT_SENDER("command.incorrect_sender"),
-    PLAYER_HELP("command.player_help"), ADMIN_HELP("command.admin_help"), INVENTORY_FULL("general.inventory_full"),
-    NUMBER_FORMAT("command.number_format"), MATERIAL_NOT_FOUND("command.material_not_found"),;
+    PLAYER_HELP("command.player_help"), ADMIN_HELP("command.admin_help"),
+    NUMBER_FORMAT("command.number_format");
 
     private final String path;
 
@@ -64,7 +64,7 @@ public enum Messages {
     }
 
     private String colorize(String message) {
-        return EntityGenetics.get().getColorManager().process(message);
+        return MinesonAPI.get().getColorManager().process(message);
     }
 
     private String format(String message, final Object... args) {
@@ -105,6 +105,6 @@ public enum Messages {
     }
 
     public YamlConfiguration getLanguages() {
-        return kz.hxncus.mc.entitygenetics.EntityGenetics.get().getConfigManager().getLanguages();
+        return MinesonAPI.get().getConfigManager().getOrCreateConfig("languages/" + Settings.LANGUAGE + ".yml");
     }
 }

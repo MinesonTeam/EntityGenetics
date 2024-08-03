@@ -1,3 +1,27 @@
 version: 1
 debug: false
 language: "en"
+food:
+  BEEF:
+    per_eat_scale: 0.01
+  MILK:
+    per_eat_scale: 0.02
+  SPIDER_EYE:
+    per_eat_scale: -0.05
+entity:
+  # Apply to any entity if not writed
+  start_scale: 0.5
+  min_scale: 1.0
+  max_scale: 1.5
+  PLAYER:
+    start_scale: 0.5-0.75
+    min_scale: 0.5-1.0
+    max_scale: 1.0-1.5
+  COW:
+    start_scale: 0.75
+    min_scale: 1.0
+    max_scale: 1.5
+  PIG:
+    start_scale: 0.75
+    min_scale: 0.75
+    max_scale: 1.0-1.5
