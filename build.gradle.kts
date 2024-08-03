@@ -17,6 +17,15 @@ version = property("projectVersion") as String
 
 allprojects {
     apply(plugin = "java")
+    tasks {
+        processResources {
+            filesMatching("**/plugin.yml") {
+                expand("version" to rootProject.version, "name" to rootProject.name)
+            }
+            duplicatesStrategy = DuplicatesStrategy.INCLUDE
+            filteringCharset = Charsets.UTF_8.name()
+        }
+    }
     repositories {
         mavenCentral()
         maven("https://papermc.io/repo/repository/maven-public/") // Paper
@@ -29,8 +38,8 @@ allprojects {
     }
     dependencies {
         compileOnly("org.spigotmc:spigot-api:$spigot")
-        compileOnly(fileTree("../libs/compileOnly/"))
         compileOnly("org.projectlombok:lombok:$lombok")
+        compileOnly(fileTree("../libs/compileOnly/"))
 
         implementation("org.bstats:bstats-bukkit:$bstats")
         implementation(fileTree("../libs/implementation/"))
@@ -53,13 +62,6 @@ tasks {
     compileJava.get().options.encoding = Charsets.UTF_8.name()
     javadoc.get().options.encoding = Charsets.UTF_8.name()
     processResources {
-        inputs.properties(
-            "version" to version,
-            "name" to rootProject.name
-        )
-        filesMatching("**/plugin.yml") {
-            expand(mapOf("version" to version, "name" to rootProject.name))
-        }
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
         filteringCharset = Charsets.UTF_8.name()
     }
